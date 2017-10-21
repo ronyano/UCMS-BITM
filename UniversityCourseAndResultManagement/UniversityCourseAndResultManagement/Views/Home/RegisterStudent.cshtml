@@ -1,0 +1,80 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+@{
+    ViewBag.Title = "Register Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Department> departments = ViewBag.Departments;
+    Student student = new Student();
+    string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+    
+}
+
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+@if (ViewBag.Message != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Message</b></p>
+}
+<form method="POST" id="studentForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentName">Name</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentName" name="StudentName" required="required" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Email">Email</label></td>
+            <td style="padding: 15px"><input type="email" id="Email" name="Email" required="required" placeholder="example@mail.com" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="ContactNo">Contact No</label></td>
+            <td style="padding: 15px"><input type="text" id="ContactNo" name="ContactNo" maxlength="11" minlength="11" required="required" placeholder="01XXXXXXXXX" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="RegDate">Date</label></td>
+            <td style="padding: 15px">
+                <input type="date" id="RegDate" name="RegDate" value="@currentDate" min="2015-01-01" max="2020-12-31" required="required" />
+            </td>
+
+        </tr>
+        
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="padding: 15px"><label for="Address">Address</label></td>
+                <td style="padding: 15px"><textarea id="Address" name="Address" required="required"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="padding: 15px"><label for="DepartmentId">Department</label></td>
+                <td style="padding: 15px">
+                    <select id="DepartmentId" name="DepartmentId" required="required">
+                        <option value="">--Select</option>
+                        @foreach (Department department in departments)
+                        {
+                            <option value="@department.Id">@department.Code</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="padding: 15px"><input type="submit" value="Register" /></td>
+            </tr>
+</table>
+</form>
+
+
+
+

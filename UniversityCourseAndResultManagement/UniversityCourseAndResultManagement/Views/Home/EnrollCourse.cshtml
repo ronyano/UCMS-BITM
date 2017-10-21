@@ -1,0 +1,140 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+
+@{
+    ViewBag.Title = "Enroll Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Student> students = ViewBag.Students;
+    string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<h2>Enroll In A Course</h2>
+<hr/>
+<form method="POST" id="enrollCourseForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentRegNo">Student Reg. No.</label></td>
+            <td style="padding: 15px">
+                <select id="StudentRegNo" name="StudentRegNo" required="required">
+                    <option value="">-Select-</option>
+                    @foreach (Student student in students)
+                    {
+                        <option value="@student.Id">@student.RegNo</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentName">Name</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentName" name="StudentName" readonly="readonly" placeholder="Student's Name"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentEmail">Email</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentEmail" name="StudentEmail" readonly="readonly" placeholder="Student's Email"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentDepartment">Department</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentDepartment" name="StudentDepartment" readonly="readonly" placeholder="Department" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Course">Select Course</label></td>
+            <td style="padding: 15px">
+                <select id="Course" name="Course" required="required">
+                    <option value="">Select...</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="EnrollDate">Date</label></td>
+            <td style="padding: 15px">
+                <input type="date" id="EnrollDate" name="EnrollDate" value="@currentDate" min="2015-01-01" max="2020-12-31" required="" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" id="StudentId" name="StudentId" />
+                <input type="hidden" id="CourseId" name="CourseId" />
+            </td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Enroll" /></td>
+        </tr>
+    </table>
+</form>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function() {
+            $("#StudentRegNo").change(function() {
+
+
+                var deptId;
+                var Id = $("#StudentRegNo").val();
+                var json = { Id: Id };
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: '@Url.Action("GetStudentByRegno", "Home")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function(data) {
+                        $("#StudentName").val(data.student.StudentName);
+                        $("#StudentEmail").val(data.student.Email);
+                        $("#StudentId").val(data.student.Id);
+
+                        $("#StudentDepartment").val(data.deptName.DepartmentName);
+                        deptId = data.student.DepartmentId;
+                        alert("Success " + deptId);
+                    }
+                });
+
+
+                $("#Course").empty();
+                $("#Course").append('<option value="">Select...</option>');
+                //alert("Out "+ deptId);
+                var courseJson = { departmentId: deptId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    //url: '/Department/GetStudentsByDepartmentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(courseJson),
+                    success: function(data) {
+                        // alert(deptId);
+                        $.each(data, function(key, value) {
+
+                            $("#Course").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                            //alert(value.Id);
+                        });
+                        //alert("Finish"+deptId);
+                    }
+                });
+
+                $("#Course").change(function () {
+                    var value = $("#Course").val();
+                    $("#CourseId").val(value);
+
+                    //var x = $("#CourseId").val();
+                    //alert("Changed "+ x);
+                });
+
+            });
+        });
+    </script>
+}
+

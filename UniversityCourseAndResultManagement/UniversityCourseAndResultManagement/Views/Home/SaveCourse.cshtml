@@ -1,0 +1,79 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+
+@{
+    ViewBag.Title = "Save Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Department> departments = ViewBag.Departments;
+    List<Semester> semesters = ViewBag.Semesters;
+}
+
+<h2>Save Course</h2>
+<hr/>
+@if (ViewBag.Message != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Message</b></p>
+}
+<form method="POST" id="courseForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CourseCode">Code</label></td>
+            <td style="padding: 15px"><input type="text" id="CourseCode" name="CourseCode" minlength="5" required="required" placeholder="Example: CSE101" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CourseName">Course Name</label></td>
+            <td style="padding: 15px"><input type="text" id="CourseName" name="CourseName" required="required" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Credit">Credit</label></td>
+            <td style="padding: 15px"><input type="text" id="Credit" name="Credit" min="0.5" max="5.0" required="required"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Description">Description</label></td>
+            <td style="padding: 15px"><textarea id="Description" name="Description"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="DepartmentId">Department</label></td>
+            <td style="padding: 15px">
+                <select id="DeparmentId" name="DepartmentId" required="required">
+                    <option value="">--Select</option>
+                    @foreach (Department department in departments)
+                    {
+                        <option value="@department.Id">@department.Code</option>
+                    }
+                </select>
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="SemesterId">Semester</label></td>
+            <td style="padding: 15px">
+                <select id="SemesterId" name="SemesterId" required="required">
+                    <option value="">--Select</option>
+                    @foreach (Semester semester in semesters)
+                    {
+                        <option value="@semester.Id">@semester.SemesterNo</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>
+

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Save Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Save Department</h2>
+<hr/>
+@if (ViewBag.Message != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Message</b></p>
+}
+
+<form method="POST" id="departmentForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Code">Code</label></td>
+            <td style="padding: 15px"><input type="text" id="Code" name="Code" minlength="2" maxlength="7" required="required" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="DepartmentName">Name</label></td>
+            <td style="padding: 15px"><input type="text" id="DepartmentName" name="DepartmentName" required="required" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>
+
+

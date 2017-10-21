@@ -1,0 +1,27 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+@model List<UniversityCourseAndResultManagement.Models.EntityModels.Department>
+@{
+    ViewBag.Title = "View Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Department</h2>
+<hr/>
+<table style="border: 1px solid #ddd; text-align: left; border-collapse: collapse; width: 100%; font-size: 20px">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Code</th>
+            <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Department department in Model)
+        {
+            <tr>
+                <td style="border: 1px solid #ddd; text-align: left; padding: 15px">@department.Code</td>
+                <td style="border: 1px solid #ddd; text-align: left; padding: 15px">@department.DepartmentName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

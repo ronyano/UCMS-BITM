@@ -1,0 +1,196 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+
+@{
+    ViewBag.Title = "Assign Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Department> departments = ViewBag.Departments;
+    //List<Semester> semesters = ViewBag.Semesters;
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@if (ViewBag.Message != null)
+{
+    <h4>@ViewBag.Message</h4>
+}
+<form method="POST" id="courseForm">
+    <table style="width: 50%; font-size: 20px">
+
+
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="DepartmentId">Department</label></td>
+            <td style="padding: 15px">
+                <select id="DepartmentId" name="DepartmentId">
+                    <option value="">--Select</option>
+                    @foreach (Department department in departments)
+                    {
+                        <option value="@department.Id">@department.Code</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="TeacherId">Teacher</label></td>
+            <td style="padding: 15px">
+                <select id="TeacherId" name="TeacherId" required="">
+                    <option value="">--Select</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CreditToBeTaken">Credit to be taken: </label></td>
+            <td style="padding: 15px"><input type="text" id="CreditToBeTaken" name="CreditToBeTaken" readonly /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CreditRemaining">Credit Remaining</label></td>
+            <td style="padding: 15px"><input type="text" id="CreditRemaining" name="CreditRemaining" readonly /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CourseCode">Course</label></td>
+            <td style="padding: 15px">
+                <select id="CourseCode" name="CourseCode" required="">
+                    <option value="">--Select</option>
+                </select>
+                <input type="hidden" id="CourseId" name="CourseId">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CourseName">Course Name: </label></td>
+            <td style="padding: 15px"><input type="text" id="CourseName" name="CourseName" readonly /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Credit">Credit: </label></td>
+            <td style="padding: 15px"><input type="text" id="Credit" name="Credit" readonly /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>
+
+
+@section scripts
+    {
+    <script>
+
+        $(document).ready(function () {
+           // alert("Ready");
+            $("#DepartmentId").change(function () {
+
+                $("#CourseName").val('');
+                $("#Credit").val('');
+                //GetCoursesByDepartmentId CourseCode
+                $("#CreditToBeTaken").val('');
+                $("#CreditRemaining").val('');
+                //alert(deptId);
+                var deptId = $("#DepartmentId").val();
+              //  alert(deptId);
+                    $("#TeacherId").empty();
+                    $("#TeacherId").append('<option value="">Select...</option>');
+                    var json = { departmentId: deptId };
+                 //   alert(deptId);
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetTeachersByDepartmentId", "Home")',
+                        //url: '/Department/GetStudentsByDepartmentId',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                $("#TeacherId").append('<option value=' + value.Id + '>' + value.TeacherName + '</option>');
+                            });
+                        }
+                    });
+
+                $("#CourseCode").empty();
+                $("#CourseCode").append('<option value="">--Select...</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    //url: '/Department/GetStudentsByDepartmentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+
+                            $("#CourseCode").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                            //alert(value.Id);
+                        });
+                    }
+                });
+
+                //GetCreditByTeacherName
+
+                $("#TeacherId").change(function () {
+                   // alert("Teacher Changed");
+
+
+                    $("#CreditToBeTaken").val('');
+                    $("#CreditRemaining").val('');
+                    var teacherId = $("#TeacherId").val();
+
+                  //  alert(creditToBeTaken);
+                    var creditTakenJson = { teacherId: teacherId };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetCreditByTeacherId", "Home")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(creditTakenJson),
+                        success: function (data) {
+                            //$("#studentTable").show();
+                            $("#CreditToBeTaken").val(data.CreditToBeTaken);
+                            $("#CreditRemaining").val(data.CreditRemaining);
+                        }
+                    });
+                });
+
+                $("#CourseCode").change(function () {
+                    alert("Course Changed");
+                    $("#CourseName").val('');
+                    $("#Credit").val('');
+
+                    var courseId = $("#CourseCode").val();
+                    $("#CourseId").val(courseId);
+                    alert("Id = "+courseId);
+                    var creditTakenJson = { Id: courseId };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("GetCourseInfoById", "Home")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(creditTakenJson),
+                        success: function (data) {
+                            //$("#studentTable").show();
+                            alert(data.CourseName);
+                            $("#CourseName").val(data.CourseName);
+                            $("#Credit").val(data.Credit);
+
+
+                        }
+                    });
+                });
+
+                });
+
+
+            });
+    </script>
+}
