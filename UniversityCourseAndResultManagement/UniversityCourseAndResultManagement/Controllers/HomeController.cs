@@ -21,6 +21,7 @@ namespace UniversityCourseAndResultManagement.Controllers
         EnrollCourseManager enrollCourseManager = new EnrollCourseManager();
         DayManager dayManager = new DayManager();
         RoomManager roomManager = new RoomManager();
+        GradeManager gradeManager = new GradeManager();
 
         public ActionResult Index()
         {
@@ -337,6 +338,26 @@ namespace UniversityCourseAndResultManagement.Controllers
         {
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult StudentResult()
+        {
+            List<Student> students = studentManager.GetAllStudents();
+            ViewBag.Students = students;
+            List<Grade> grades = gradeManager.GetAllGrades();
+            ViewBag.Grades = grades;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult StudentResult(Result result)
+        {
+            List<Student> students = studentManager.GetAllStudents();
+            ViewBag.Students = students;
+            List<Grade> grades = gradeManager.GetAllGrades();
+            ViewBag.Grades = grades;
             return View();
         }
 
