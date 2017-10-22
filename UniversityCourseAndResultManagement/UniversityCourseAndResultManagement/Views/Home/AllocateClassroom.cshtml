@@ -1,0 +1,76 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+
+@{
+    ViewBag.Title = "Allocate Classroom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Department> departments = ViewBag.Departments;
+    List<Room> rooms = ViewBag.Rooms;
+    List<Day> days = ViewBag.Days;
+}
+
+<h2>Allocate Classroom</h2>
+<hr/>
+<form method="POST" id="allocateClassroomForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="DepartmentId">Department</label></td>
+            <td style="padding: 15px">
+                <select id="DepartmentId" name="DepartmentId" required="required">
+                    <option value="">--Select</option>
+                    @foreach (Department department in departments)
+                    {
+                        <option value="@department.Id">@department.Code</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="CourseId">Course</label></td>
+            <td style="padding: 15px">
+                <select id="CourseId" name="CourseId" required="required">
+                    <option value="">--Select</option>
+                    
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="RoomId">Room No</label></td>
+            <td style="padding: 15px">
+                <select id="RoomId" name="RoomId" required="required">
+                    <option value="">--Select</option>
+                    @foreach (Room room in rooms)
+                    {
+                        <option value="@room.Id">@room.RoomNo</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="DayId">Day</label></td>
+            <td style="padding: 15px">
+                <select id="DayId" name="DayId" required="required">
+                    <option value="">--Select</option>
+                    @foreach (Day day in days)
+                    {
+                        <option value="@day.Id">@day.DayName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Allocate" /></td>
+        </tr>
+    </table>
+</form>
+
