@@ -309,7 +309,7 @@ namespace UniversityCourseAndResultManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult AllocateClassroom()
+        public ActionResult AllocateClassroom(AllocateClassroom allocateClassroom)
         {
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;
