@@ -1,0 +1,80 @@
+﻿@using UniversityCourseAndResultManagement.Models.EntityModels
+
+@{
+    ViewBag.Title = "Student Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Student> students = ViewBag.Students;
+    List<Grade> grades = ViewBag.Grades;
+}
+
+<h2>Save Student Result</h2>
+<hr/>
+<form method="POST" id="saveResultForm">
+    <table style="width: 50%; font-size: 20px">
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentRegNo">Student Reg. No.</label></td>
+            <td style="padding: 15px">
+                <select id="StudentRegNo" name="StudentRegNo" required="required">
+                    <option value="">-Select-</option>
+                    @foreach (Student student in students)
+                    {
+                        <option value="@student.Id">@student.RegNo</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentName">Name</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentName" name="StudentName" readonly="readonly" placeholder="Student's Name" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentEmail">Email</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentEmail" name="StudentEmail" readonly="readonly" placeholder="Student's Email" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="StudentDepartment">Department</label></td>
+            <td style="padding: 15px"><input type="text" id="StudentDepartment" name="StudentDepartment" readonly="readonly" placeholder="Department" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="Course">Select Course</label></td>
+            <td style="padding: 15px">
+                <select id="Course" name="Course" required="required">
+                    <option value="">Select...</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><label for="GradeLetter">Select Grade Letter</label></td>
+            <td style="padding: 15px">
+                <select id="GradeLetter" name="GradeLetter" required="required">
+                    <option value="">-Select-</option>
+                    @foreach (Grade grade  in grades)
+                    {
+                        <option value="@grade.Id">@grade.GradeLetter</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" id="StudentId" name="StudentId" />
+                <input type="hidden" id="CourseId" name="CourseId" />
+            </td>
+            <td></td>
+            <td></td>
+            <td style="padding: 15px"><input type="submit" value="Save" /></td>
+        </tr>
+    </table>
+</form>
