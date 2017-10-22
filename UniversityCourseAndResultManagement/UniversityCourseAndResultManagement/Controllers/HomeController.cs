@@ -324,6 +324,21 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult ClassScheduleRoomInformation()
+        {
+            List<Department> departments = departmentManager.GetAllDepartments();
+            ViewBag.Departments = departments;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ClassScheduleRoomInformation(Department department)
+        {
+            List<Department> departments = departmentManager.GetAllDepartments();
+            ViewBag.Departments = departments;
+            return View();
+        }
 
     }
 }
