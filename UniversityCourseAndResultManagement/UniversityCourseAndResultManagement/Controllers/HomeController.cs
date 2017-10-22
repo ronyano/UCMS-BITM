@@ -19,6 +19,8 @@ namespace UniversityCourseAndResultManagement.Controllers
         StudentManager studentManager = new StudentManager();
         CourseAssignManager courseAssignManager = new CourseAssignManager();
         EnrollCourseManager enrollCourseManager = new EnrollCourseManager();
+        DayManager dayManager = new DayManager();
+        RoomManager roomManager = new RoomManager();
 
         public ActionResult Index()
         {
