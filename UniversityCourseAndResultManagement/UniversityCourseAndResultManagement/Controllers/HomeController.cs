@@ -346,6 +346,10 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+        public ActionResult Result()
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult StudentResult()
         {
@@ -363,6 +367,22 @@ namespace UniversityCourseAndResultManagement.Controllers
             ViewBag.Students = students;
             List<Grade> grades = gradeManager.GetAllGrades();
             ViewBag.Grades = grades;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ViewResult()
+        {
+            List<Student> students = studentManager.GetAllStudents();
+            ViewBag.Students = students;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ViewResult(Student student)
+        {
+            List<Student> students = studentManager.GetAllStudents();
+            ViewBag.Students = students;
             return View();
         }
 
