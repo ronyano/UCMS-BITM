@@ -183,6 +183,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EntityModels\Course.cs" />
     <Compile Include="Models\EntityModels\CourseAssignToTeacher.cs" />
+    <Compile Include="Models\EntityModels\Day.cs" />
     <Compile Include="Models\EntityModels\Department.cs" />
     <Compile Include="Models\EntityModels\Designation.cs" />
     <Compile Include="Models\EntityModels\EnrollInACourse.cs" />
