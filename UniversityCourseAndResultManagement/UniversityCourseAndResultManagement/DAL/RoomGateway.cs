@@ -7,28 +7,28 @@ using UniversityCourseAndResultManagement.Models.EntityModels;
 
 namespace UniversityCourseAndResultManagement.DAL
 {
-    public class DayGateway : CommonGateway
+    public class RoomGateway : CommonGateway
     {
-        public List<Day> GetAllDays()
+        public List<Room> GetAllRooms()
         {
-            string query = "SELECT * FROM Day";
+            string query = "SELECT * FROM Room";
             Connection.Open();
             Command.CommandText = query;
             SqlDataReader reader = Command.ExecuteReader();
-            List<Day> days = new List<Day>();
+            List<Room> rooms = new List<Room>();
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    Day day = new Day();
-                    day.Id = (int) reader["Id"];
-                    day.DayName = reader["DayName"].ToString();
-                    days.Add(day);
+                    Room room = new Room();
+                    room.Id = (int) reader["Id"];
+                    room.RoomNo = (int) reader["RoomNo"];
+                    rooms.Add(room);
                 }
             }
             reader.Close();
             Connection.Close();
-            return days;
+            return rooms;
         }
     }
 }
