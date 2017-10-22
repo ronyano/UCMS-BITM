@@ -296,6 +296,29 @@ namespace UniversityCourseAndResultManagement.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult AllocateClassroom()
+        {
+            List<Department> departments = departmentManager.GetAllDepartments();
+            ViewBag.Departments = departments;
+            List<Room> rooms = roomManager.GetAllRooms();
+            ViewBag.Rooms = rooms;
+            List<Day> days = dayManager.GetAllDays();
+            ViewBag.Days = days;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AllocateClassroom()
+        {
+            List<Department> departments = departmentManager.GetAllDepartments();
+            ViewBag.Departments = departments;
+            List<Room> rooms = roomManager.GetAllRooms();
+            ViewBag.Rooms = rooms;
+            List<Day> days = dayManager.GetAllDays();
+            ViewBag.Days = days;
+            return View();
+        }
         public ActionResult AboutUs()
         {
             return View();
