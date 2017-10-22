@@ -315,6 +315,7 @@
     <Content Include="Views\Home\AllocateClassroom.cshtml" />
     <Content Include="Views\Home\ClassScheduleRoomInformation.cshtml" />
     <Content Include="Views\Home\StudentResult.cshtml" />
+    <Content Include="Views\Home\ClassRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

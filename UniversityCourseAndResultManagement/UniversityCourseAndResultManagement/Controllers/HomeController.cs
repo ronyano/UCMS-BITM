@@ -341,6 +341,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+        public ActionResult ClassRoom()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult StudentResult()
         {
