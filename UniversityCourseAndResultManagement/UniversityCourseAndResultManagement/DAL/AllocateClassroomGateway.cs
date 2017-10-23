@@ -10,7 +10,7 @@ namespace UniversityCourseAndResultManagement.DAL
     {
         public int Save(AllocateClassroom allocateClassroom)
         {
-            string query = "INSERT INTO AllocateClassroom VALUES('" + allocateClassroom.DepartmentId + "','" + allocateClassroom.CourseId + "','"  + allocateClassroom.RoomId + "','" + allocateClassroom.DayId + "','" + allocateClassroom.FromTime + "','"+ allocateClassroom.ToTime + "')";
+            string query = "INSERT INTO AllocateClassroom VALUES('" + allocateClassroom.DepartmentId + "','" + allocateClassroom.CourseId + "','"  + allocateClassroom.RoomId + "','" + allocateClassroom.DayId + "','" + allocateClassroom.FromTime + "','"+ allocateClassroom.ToTime + "',1)";
             // if(Connection.State != ConnectionState.Open)
             Connection.Open();
             Command.CommandText = query;

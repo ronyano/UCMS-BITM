@@ -22,5 +22,7 @@ namespace UniversityCourseAndResultManagement.BLL
         {
             return courseAssignGateway.GetTeacherIdByCourseId(courseId);
         }
+
+        
     }
 }
