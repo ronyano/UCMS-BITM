@@ -660,3 +660,5 @@ E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManage
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.pdb
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.dll
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.xml
+E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.dll
+E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.xml
