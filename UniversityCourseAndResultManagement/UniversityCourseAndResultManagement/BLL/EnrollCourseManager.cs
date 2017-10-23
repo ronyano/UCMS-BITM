@@ -20,5 +20,10 @@ namespace UniversityCourseAndResultManagement.BLL
                 return false;
             }
         }
+
+        public List<EnrollInACourse> GetAllEnrollInACourses()
+        {
+            return enrollCourseGateway.GetAllEnrollInACourses();
+        }
     }
 }

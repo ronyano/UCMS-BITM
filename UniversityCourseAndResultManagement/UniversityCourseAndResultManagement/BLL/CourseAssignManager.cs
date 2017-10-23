@@ -27,8 +27,8 @@ namespace UniversityCourseAndResultManagement.BLL
         {
             return courseAssignGateway.GetTeacherIdByCourseId(courseId);
         }
-<<<<<<< HEAD
-=======
+
+
 
         public CourseAssignToTeacher GetByCourseId(int id)
         {
@@ -45,7 +45,6 @@ namespace UniversityCourseAndResultManagement.BLL
             return false;
         }
 
-        
->>>>>>> 1c40b288c9de276de222b0f2e9ab34c849ef5e06
+
     }
 }

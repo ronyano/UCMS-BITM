@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using UniversityCourseAndResultManagement.Models.EntityModels;
@@ -19,5 +20,28 @@ namespace UniversityCourseAndResultManagement.DAL
             Connection.Close();
             return rowsAffected;
         }
+        public List<EnrollInACourse> GetAllEnrollInACourses()
+        {
+            string query = "SELECT * FROM EnrollCourse";
+            Connection.Open();
+            Command.CommandText = query;
+            SqlDataReader reader = Command.ExecuteReader();
+            List<EnrollInACourse> enrollInACourses = new List<EnrollInACourse>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    EnrollInACourse enrollInACourse = new EnrollInACourse();
+                    enrollInACourse.Id = (int)reader["Id"];
+                    enrollInACourse.StudentId = (int) reader["StudentId"];
+                    enrollInACourse.CourseId = (int)reader["CourseId"];
+                    enrollInACourses.Add(enrollInACourse);
+                }
+
+            }
+            reader.Close();
+            Connection.Close();
+            return enrollInACourses;
+        } 
     }
 }

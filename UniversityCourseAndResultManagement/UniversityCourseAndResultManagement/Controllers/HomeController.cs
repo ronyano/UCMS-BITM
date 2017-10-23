@@ -23,6 +23,8 @@ namespace UniversityCourseAndResultManagement.Controllers
         RoomManager roomManager = new RoomManager();
         GradeManager gradeManager = new GradeManager();
         AllocateClassroomManager allocateClassroomManager = new AllocateClassroomManager();
+        ResultManager resultManager =new ResultManager();
+
 
         public ActionResult Index()
         {
@@ -191,7 +193,27 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(courseList);
         }
 
+        
 
+        public JsonResult GetCoursesByStudentId(int studentId)
+        {
+            var enrollCourses = enrollCourseManager.GetAllEnrollInACourses();
+            var enrollCourseList = enrollCourses.Where(a => a.StudentId == studentId).ToList();
+
+            
+            return Json(enrollCourseList);
+        }
+
+        public JsonResult GetCoursesByCourseId(int courseId)
+        {
+            var courses = courseManager.GetAllCourses();
+            var courseList = courses.Where(a => a.Id == courseId).ToList();
+
+            
+            return Json(courseList);
+        }
+
+        /*
         public JsonResult GetScheduleByCourseId(int courseId)
         {
             var rooms = allocateClassroomManager.GetAllRoomSchedule();
@@ -200,7 +222,7 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(roomsList);
         }
 
-
+        */
         public JsonResult GetCreditByTeacherId(int teacherId)
         {
 
@@ -422,6 +444,15 @@ namespace UniversityCourseAndResultManagement.Controllers
         [HttpPost]
         public ActionResult StudentResult(Result result)
         {
+            bool saveSuccess = resultManager.Save(result);
+            if (saveSuccess)
+            {
+                ViewBag.message = "Successfully Graded";
+            }
+            else
+            {
+                ViewBag.message = "Not Graded";
+            }
             List<Student> students = studentManager.GetAllStudents();
             ViewBag.Students = students;
             List<Grade> grades = gradeManager.GetAllGrades();

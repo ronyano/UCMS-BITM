@@ -68,6 +68,9 @@
             </td>
         </tr>
         <tr>
+            <input type="hidden" id="StudentId" name="StudentId"/>
+            <input type="hidden" id="CourseId" name="CourseId"/>
+            <input type="hidden" id="GradeId" name="GradeId"/>
             <td></td>
             <td></td>
             <td style="padding: 15px"><input type="submit" value="Save" /></td>
@@ -104,39 +107,56 @@
                 });
 
 
-               // $("#GradeLetter").empty();
+                // $("#GradeLetter").empty();
                 //$("#GradeLetter").append('<option value="">Select...</option>');
 
                 $("#Course").empty();
                 $("#Course").append('<option value="">Select...</option>');
                 //alert("Out "+ deptId);
-                var courseJson = { departmentId: deptId };
+                var enrollCourseJson = { studentId: Id };
 
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    url: '@Url.Action("GetCoursesByStudentId", "Home")',
                     //url: '/Department/GetStudentsByDepartmentId',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(courseJson),
+                    data: JSON.stringify(enrollCourseJson),
                     success: function(data) {
                         // alert(deptId);
                         $.each(data, function(key, value) {
 
-                            $("#Course").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                            var courseJson = { courseId: value.CourseId };
+
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("GetCoursesByCourseId", "Home")',
+                                //url: '/Department/GetStudentsByDepartmentId',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(courseJson),
+                                success: function(inData) {
+                                    $.each(inData, function(key, value) {
+                                        alert(value.Id);
+                                        $("#Course").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                                    });
+                                }
+                            });
                             //alert(value.Id);
                         });
                         //alert("Finish"+deptId);
                     }
                 });
 
-                $("#Course").change(function () {
+                $("#Course").change(function() {
                     var value = $("#Course").val();
                     $("#CourseId").val(value);
+                });
 
+                $("#GradeLetter").change(function() {
+                    var value = $("#GradeLetter").val();
+                    $("#GradeId").val(value);
                     //var x = $("#CourseId").val();
                     //alert("Changed "+ x);
                 });
-
             });
         });
     </script>
