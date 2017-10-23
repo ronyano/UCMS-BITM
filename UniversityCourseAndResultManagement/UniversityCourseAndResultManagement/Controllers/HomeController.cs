@@ -22,6 +22,7 @@ namespace UniversityCourseAndResultManagement.Controllers
         DayManager dayManager = new DayManager();
         RoomManager roomManager = new RoomManager();
         GradeManager gradeManager = new GradeManager();
+        AllocateClassroomManager allocateClassroomManager = new AllocateClassroomManager();
 
         public ActionResult Index()
         {
@@ -312,6 +313,8 @@ namespace UniversityCourseAndResultManagement.Controllers
         [HttpPost]
         public ActionResult AllocateClassroom(AllocateClassroom allocateClassroom)
         {
+            bool rowsAffected = allocateClassroomManager.Save(allocateClassroom);
+
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;
             List<Room> rooms = roomManager.GetAllRooms();

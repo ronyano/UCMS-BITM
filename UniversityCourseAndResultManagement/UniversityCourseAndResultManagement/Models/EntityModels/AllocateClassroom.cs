@@ -8,7 +8,7 @@ namespace UniversityCourseAndResultManagement.Models.EntityModels
     public class AllocateClassroom
     {
        // DepartmentIdCourseIdRoomIdDayIdFromTimeToTime
-
+        public int  Id { get; set; }
         public int  DepartmentId { get; set; }
         public int CourseId { get; set; }
         public int  RoomId { get; set; }

@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\AllocateClassroomManager.cs" />
     <Compile Include="BLL\CourseAssignManager.cs" />
     <Compile Include="BLL\CourseManager.cs" />
     <Compile Include="BLL\DayManager.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="BLL\TeacherManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\AllocateClassroomGateway.cs" />
     <Compile Include="DAL\CommonGateway.cs" />
     <Compile Include="DAL\CourseAssignGateway.cs" />
     <Compile Include="DAL\CourseGateway.cs" />
