@@ -386,5 +386,7 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+        
+
     }
 }
