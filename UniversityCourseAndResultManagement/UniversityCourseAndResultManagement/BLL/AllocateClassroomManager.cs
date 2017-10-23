@@ -17,5 +17,10 @@ namespace UniversityCourseAndResultManagement.BLL
             else
                 return false;
         }
+
+        public List<AllocateClassroom> GetAllRoomSchedule()
+        {
+            return allocateClassroomGateway.GetAllRoomSchedule();
+        }
     }
 }

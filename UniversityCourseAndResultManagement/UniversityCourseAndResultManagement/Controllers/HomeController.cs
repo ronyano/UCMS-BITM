@@ -173,7 +173,7 @@ namespace UniversityCourseAndResultManagement.Controllers
         public JsonResult GetTeacherByCourseId(int courseId)
         {
             int teacherId = courseAssignManager.GetTeacherIdByCourseId(courseId);
-            var teacherName = teacherManager.GetAllTeachers().FirstOrDefault(c => c.Id == teacherId);
+            var teacherName = teacherManager.GetById(teacherId);
             return Json(teacherName);
         }
 
@@ -191,6 +191,14 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(courseList);
         }
 
+
+        public JsonResult GetScheduleByCourseId(int courseId)
+        {
+            var rooms = allocateClassroomManager.GetAllRoomSchedule();
+            var roomsList = rooms.Where(a => a.CourseId == courseId).ToList();
+            //var roomsList = rooms.FirstOrDefault(c => c.Id == departmentId);
+            return Json(roomsList);
+        }
 
 
         public JsonResult GetCreditByTeacherId(int teacherId)
@@ -297,6 +305,54 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(result);
         }
 
+        public JsonResult GetMeaning(int roomId, int dayId, string fromTime, string toTime)
+        {
+            
+            var room = roomManager.GetAllRooms().FirstOrDefault(c => c.Id == roomId);
+            var roomName = room.RoomNo;
+            var day = dayManager.GetAllDays().FirstOrDefault(c => c.Id == dayId);
+            var dayName = day.DayName;
+            var ft = fromTime.Split(':');
+            int fromHour = int.Parse(ft[0]);
+            var tt = toTime.Split(':');
+            int toHour = int.Parse(tt[0]);
+
+            var sendFtime = "";
+            var sendTtime = "";
+
+            if (fromHour > 12)
+            {
+                sendFtime = (fromHour%12).ToString() + " : " + ft[1] + " PM";
+            }
+            else
+            {
+                sendFtime = (fromHour).ToString() + " : " + ft[1] + " AM";
+            }
+            if (toHour > 12)
+            {
+                sendTtime = (toHour%12).ToString() + " : " + tt[1] + " PM";
+            }
+            else
+            {
+                sendTtime = (toHour).ToString() + " : " + tt[1] + " AM";
+            }
+            /*
+             * var result=new { Result="Successed", ID="32"};
+                return Json(result, JsonRequestBehavior.AllowGet);
+             */
+            var result = new
+            {
+                roomName,
+                dayName,
+                sendFtime,
+                sendTtime
+            };
+
+            return Json(result);
+        }
+
+
+
 
         [HttpGet]
         public ActionResult AllocateClassroom()
@@ -323,8 +379,6 @@ namespace UniversityCourseAndResultManagement.Controllers
             ViewBag.Days = days;
             return View();
         }
-
-        
         public ActionResult AboutUs()
         {
             return View();

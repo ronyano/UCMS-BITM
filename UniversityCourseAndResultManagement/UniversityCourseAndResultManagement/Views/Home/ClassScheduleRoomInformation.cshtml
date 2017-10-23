@@ -28,7 +28,7 @@
     <br />
     <hr />
     <br />
-    <table class="table table-striped table-hover" id="courseTable">
+    <table class="table table-striped table-hover table-bordered" id="courseTable">
         <thead>
             <tr>
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Course Code</th>
@@ -38,57 +38,93 @@
         </thead>
         <tbody id="courseTableBody"></tbody>
     </table>
-</form>@section scripts
-{
-    <script>
-
-        $(document).ready(function() {
-            $("#DepartmentId").change(function () {
+</form>
 
 
+@section scripts
+       {
+           <script>
 
-                var deptId = $("#DepartmentId").val();
-               // alert(deptId);
-                $("#courseTableBody").empty();
-                var json = { departmentId: deptId };
-                $.ajax({
-                    //async: false,
-                    type: "POST",
-                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
-                    //url: '/Department/GetStudentsByDepartmentId',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(json),
-                    success: function(data) {
-                        //alert("Success");
-                        $.each(data, function (key, value) {
-                            var teacherName = "Not Assigned Yet";
-
-                            var teacherJson = { courseId: value.Id };
-                            $.ajax({
-                                async: false,
-                                type: "POST",
-                                url: '@Url.Action("GetTeacherByCourseId", "Home")',
-                                //url: '/Department/GetStudentsByDepartmentId',
-                                contentType: "application/json; charset=utf-8",
-                                data: JSON.stringify(teacherJson),
-                                success: function(data) {
-                                    teacherName = data.TeacherName;
-                                    alert("Success Teacher name = " + teacherName);
-                                }
-                            });
+               $(document).ready(function() {
+                   $("#DepartmentId").change(function() {
 
 
-                            $("#courseTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.SemesterId + '</td><td>'+ teacherName+ '</td></tr>');
-                            // $("#courseTableBody").append('<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>');
+                       var deptId = $("#DepartmentId").val();
+                       // alert(deptId);
+                       $("#courseTableBody").empty();
+                       var teacher = [];
+                       var json = { departmentId: deptId };
+                       $.ajax({
+                           //async: false,
+                           type: "POST",
+                           url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                           //url: '/Department/GetStudentsByDepartmentId',
+                           contentType: "application/json; charset=utf-8",
+                           data: JSON.stringify(json),
+                           success: function(data) {
+                               //var i = 0;
+                               //alert("Success");
+                               $.each(data, function(key, value) {
 
-                            alert("Finished = "+value.CourseCode);
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-}
+                                   var teacherName = '';
+                                   var courseJson = { courseId: value.Id };
+                                   $.ajax({
+                                       async: false,
+                                       type: "POST",
+                                       url: '@Url.Action("GetScheduleByCourseId", "Home")',
+                                       //url: '/Department/GetStudentsByDepartmentId',
+                                       contentType: "application/json; charset=utf-8",
+                                       data: JSON.stringify(courseJson),
+                                       success: function(data) {
+                                         //  alert("Data: " + data);
+                                           if (!$.trim(data))
+                                           {
+                                              // alert("What follows is blank: "+ data);
+                                               teacherName = "Not Assigned Yet";
+                                           }
+                                           else
+                                           {
+                                               //alert("What follows is not blank: " + data.CourseId);
+                                               // teacherName = data.TeacherName;
+                                               // teacherName.val('');
+                                               $.each(data, function(key, value) {
+
+                                                   //translating number into MANUSH
+                                                   var meaningJson = { roomId: value.RoomId, dayId: value.DayId, fromTime: value.FromStringTime, toTime: value.ToStringTime };
+                                                   $.ajax({
+                                                       async: false,
+                                                       type: "POST",
+                                                       url: '@Url.Action("GetMeaning", "Home")',
+                                                       //url: '/Department/GetStudentsByDepartmentId',
+                                                       contentType: "application/json; charset=utf-8",
+                                                       data: JSON.stringify(meaningJson),
+                                                       success: function(inData) {
+
+                                                           teacherName += " Room no - " + inData.roomName + " Day - " + inData.dayName + " From - " + inData.sendFtime + " To - " + inData.sendTtime;
+                                                           //alert("Success Loop = " + teacherName);
+                                                       }
+                                                   });
+
+                                               });
+                                            }
+                                            }
+                                            });
+                      // alert("Out");
+
+
+                       $("#courseTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + teacherName + '</td></tr>');
+                       // $("#courseTableBody").append('<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>');
+
+                       //alert("Finished = "+value.CourseCode);
+
+                   });
+               }
+               });
+               });
+               });
+           </script>
+       }
 
 
 
+       

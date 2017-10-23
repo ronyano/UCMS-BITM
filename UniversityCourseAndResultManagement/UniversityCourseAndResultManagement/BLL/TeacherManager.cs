@@ -28,6 +28,11 @@ namespace UniversityCourseAndResultManagement.BLL
         {
             return teacherGateway.GetByEmail(email);
         }
+
+        public Teacher GetById(int id)
+        {
+            return teacherGateway.GetById(id);
+        }
         public bool IsEmailAvailable(string email)
         {
             Teacher teacher = GetByEmail(email);

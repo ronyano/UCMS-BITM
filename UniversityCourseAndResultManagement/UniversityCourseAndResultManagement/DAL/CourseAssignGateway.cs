@@ -11,8 +11,9 @@ namespace UniversityCourseAndResultManagement.DAL
     {
         public int Save(CourseAssignToTeacher courseAssignToTeacher)
         {
+            bool bit = true;
             string query = "INSERT INTO CourseAssignTeacher VALUES('" + courseAssignToTeacher.TeacherId + "','" + courseAssignToTeacher.DepartmentId + "','" +
-                           courseAssignToTeacher.CourseId + "', 1)";
+                           courseAssignToTeacher.CourseId + "','"+bit+ "')";
            // if(Connection.State != ConnectionState.Open)
             Connection.Open();
             Command.CommandText = query;

@@ -78,9 +78,17 @@
                                 //url: '/Department/GetStudentsByDepartmentId',
                                 contentType: "application/json; charset=utf-8",
                                 data: JSON.stringify(teacherJson),
-                                success: function(data) {
-                                    teacherName = data.TeacherName;
-                                    alert("Success Teacher name = " + teacherName);
+                                success: function (data) {
+                                    if (!$.trim(data.TeacherName)) {
+                                        //alert("What follows is blank: " + data.TeacherName);
+                                        teacherName = "Not Assigned Yet";
+                                    }
+                                    else {
+                                        //alert("What follows is not blank: " + data.TeacherName);
+                                        teacherName = data.TeacherName;
+                                    }
+                                    
+                                    //alert("Success Teacher name = " + data.TeacherName);
                                 }
                             });
 
@@ -88,7 +96,7 @@
                             $("#courseTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.SemesterId + '</td><td>'+ teacherName+ '</td></tr>');
                             // $("#courseTableBody").append('<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>');
 
-                            alert("Finished = "+value.CourseCode);
+                            //alert("Finished = "+value.CourseCode);
                         });
                     }
                 });

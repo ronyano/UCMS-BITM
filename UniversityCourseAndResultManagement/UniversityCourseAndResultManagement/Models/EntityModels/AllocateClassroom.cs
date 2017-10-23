@@ -16,6 +16,9 @@ namespace UniversityCourseAndResultManagement.Models.EntityModels
         public DateTime FromTime { get; set; }
         public DateTime ToTime { get; set; }
 
+        public string FromStringTime { get; set; }
+        public string ToStringTime { get; set; }
+
 
     }
 }
