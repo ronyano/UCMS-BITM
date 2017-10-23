@@ -323,6 +323,8 @@ namespace UniversityCourseAndResultManagement.Controllers
             ViewBag.Days = days;
             return View();
         }
+
+        
         public ActionResult AboutUs()
         {
             return View();
