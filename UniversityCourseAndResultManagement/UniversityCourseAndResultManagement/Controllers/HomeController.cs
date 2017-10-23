@@ -155,14 +155,14 @@ namespace UniversityCourseAndResultManagement.Controllers
                 if (teacherManager.UpdateCredit(courseAssignToTeacher.TeacherId,
                     courseManager.GetGetCreditById(courseAssignToTeacher.CourseId)))
                 {
-                    ViewBag.Message = "Course Assigned and credit modified";
+                    ViewBag.Message = "Course Assigned and Remaining credit modified";
                 }
 
-                else ViewBag.Message = "Course Assigned";
+                else ViewBag.Message = "Course Assigned Successful";
             }
             else
             {
-                ViewBag.Message = "Course can not be assigned!";
+                ViewBag.Message = "This Course is already Assigned";
             }
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;

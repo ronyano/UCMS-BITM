@@ -658,6 +658,7 @@ E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManage
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.csprojResolveAssemblyReference.cache
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.dll
 E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.pdb
+<<<<<<< HEAD
 C:\Users\Web App Develop .Net\Desktop\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\UniversityCourseAndResultManagement.dll.config
 C:\Users\Web App Develop .Net\Desktop\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\UniversityCourseAndResultManagement.dll
 C:\Users\Web App Develop .Net\Desktop\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\UniversityCourseAndResultManagement.pdb
@@ -717,3 +718,9 @@ C:\Users\Web App Develop .Net\Desktop\UCMS-BITM\UniversityCourseAndResultManagem
 C:\Users\Web App Develop .Net\Desktop\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.pdb
 F:\Github_Sumon\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.dll
 F:\Github_Sumon\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.xml
+=======
+E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.dll
+E:\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.xml
+E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.dll
+E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\itextsharp.xml
+>>>>>>> 1c40b288c9de276de222b0f2e9ab34c849ef5e06
