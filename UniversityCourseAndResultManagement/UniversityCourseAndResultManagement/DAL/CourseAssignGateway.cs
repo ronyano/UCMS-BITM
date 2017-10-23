@@ -39,6 +39,26 @@ namespace UniversityCourseAndResultManagement.DAL
 
             return assignToTeacher.TeacherId;
         }
-    
+
+        public CourseAssignToTeacher GetByCourseId(int id)
+        {
+            string query = "SELECT * FROM CourseAssignTeacher WHERE CourseId = " + id + "";
+            Connection.Open();
+            Command.CommandText = query;
+            SqlDataReader reader = Command.ExecuteReader();
+            CourseAssignToTeacher courseAssignToTeacher = null;
+            if (reader.HasRows)
+            {
+                reader.Read();
+                courseAssignToTeacher = new CourseAssignToTeacher();
+                courseAssignToTeacher.CourseId = (int) reader["CourseId"];
+                courseAssignToTeacher.DepartmentId = (int) reader["DepartmentId"];
+                courseAssignToTeacher.TeacherId = (int) reader["TeacherId"];
+            }
+            reader.Close();
+            Connection.Close();
+            return courseAssignToTeacher;
+        }
+
     }
 }
