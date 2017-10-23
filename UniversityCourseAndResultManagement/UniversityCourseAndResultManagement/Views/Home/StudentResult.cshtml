@@ -74,3 +74,70 @@
         </tr>
     </table>
 </form>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function() {
+            $("#StudentRegNo").change(function() {
+
+
+                var deptId;
+                var Id = $("#StudentRegNo").val();
+                var json = { Id: Id };
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: '@Url.Action("GetStudentByRegno", "Home")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function(data) {
+                        $("#StudentName").val(data.student.StudentName);
+                        $("#StudentEmail").val(data.student.Email);
+                        $("#StudentId").val(data.student.Id);
+
+                        $("#StudentDepartment").val(data.deptName.DepartmentName);
+                        deptId = data.student.DepartmentId;
+                        alert("Success " + deptId);
+                    }
+                });
+
+
+               // $("#GradeLetter").empty();
+                //$("#GradeLetter").append('<option value="">Select...</option>');
+
+                $("#Course").empty();
+                $("#Course").append('<option value="">Select...</option>');
+                //alert("Out "+ deptId);
+                var courseJson = { departmentId: deptId };
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    //url: '/Department/GetStudentsByDepartmentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(courseJson),
+                    success: function(data) {
+                        // alert(deptId);
+                        $.each(data, function(key, value) {
+
+                            $("#Course").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                            //alert(value.Id);
+                        });
+                        //alert("Finish"+deptId);
+                    }
+                });
+
+                $("#Course").change(function () {
+                    var value = $("#Course").val();
+                    $("#CourseId").val(value);
+
+                    //var x = $("#CourseId").val();
+                    //alert("Changed "+ x);
+                });
+
+            });
+        });
+    </script>
+}

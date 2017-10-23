@@ -28,7 +28,7 @@
     <br />
     <hr />
     <br />
-    <table class="table table-striped table-hover" id="">
+    <table class="table table-striped table-hover" id="courseTable">
         <thead>
             <tr>
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Course Code</th>
@@ -36,7 +36,59 @@
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Schedule Info</th>
             </tr>
         </thead>
-        <tbody id=""></tbody>
+        <tbody id="courseTableBody"></tbody>
     </table>
-</form>
+</form>@section scripts
+{
+    <script>
+
+        $(document).ready(function() {
+            $("#DepartmentId").change(function () {
+
+
+
+                var deptId = $("#DepartmentId").val();
+               // alert(deptId);
+                $("#courseTableBody").empty();
+                var json = { departmentId: deptId };
+                $.ajax({
+                    //async: false,
+                    type: "POST",
+                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    //url: '/Department/GetStudentsByDepartmentId',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function(data) {
+                        //alert("Success");
+                        $.each(data, function (key, value) {
+                            var teacherName = "Not Assigned Yet";
+
+                            var teacherJson = { courseId: value.Id };
+                            $.ajax({
+                                async: false,
+                                type: "POST",
+                                url: '@Url.Action("GetTeacherByCourseId", "Home")',
+                                //url: '/Department/GetStudentsByDepartmentId',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(teacherJson),
+                                success: function(data) {
+                                    teacherName = data.TeacherName;
+                                    alert("Success Teacher name = " + teacherName);
+                                }
+                            });
+
+
+                            $("#courseTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.SemesterId + '</td><td>'+ teacherName+ '</td></tr>');
+                            // $("#courseTableBody").append('<tr><td>a</td><td>b</td><td>c</td><td>d</td></tr>');
+
+                            alert("Finished = "+value.CourseCode);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
 
