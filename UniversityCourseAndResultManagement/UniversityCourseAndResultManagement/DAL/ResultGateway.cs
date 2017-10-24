@@ -22,6 +22,26 @@ namespace UniversityCourseAndResultManagement.DAL
             return rowsAffected;
         }
 
+        public int IsStudentResultAssignable(Result result)
+        {
+            string query = "SELECT COUNT(*) FROM Result WHERE CourseId = " + result.CourseId + "AND StudentId = " +
+                           result.StudentId + "";
+            Connection.Open();
+            Command.CommandText = query;
+            SqlDataReader reader = Command.ExecuteReader();
+            int count = 0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    count += Convert.ToInt32(reader[0]);
+                }
+            }
+            Connection.Close();
+            reader.Close();
+            return count;
+        }
+
 
         public List<Result> GetAllResults()
         {

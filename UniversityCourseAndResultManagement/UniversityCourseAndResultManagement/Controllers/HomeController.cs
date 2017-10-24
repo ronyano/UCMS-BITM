@@ -514,11 +514,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             bool saveSuccess = resultManager.Save(result);
             if (saveSuccess)
             {
-                ViewBag.message = "Successfully Graded";
+                ViewBag.Message = "Successfully Graded";
             }
             else
             {
-                ViewBag.message = "Not Graded";
+                ViewBag.Message = "Already Graded";
             }
             List<Student> students = studentManager.GetAllStudents();
             ViewBag.Students = students;
