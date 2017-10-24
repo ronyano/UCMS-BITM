@@ -443,7 +443,14 @@ namespace UniversityCourseAndResultManagement.Controllers
         public ActionResult AllocateClassroom(AllocateClassroom allocateClassroom)
         {
             bool rowsAffected = allocateClassroomManager.Save(allocateClassroom);
-
+            if (rowsAffected)
+            {
+                ViewBag.Message = "Room allocated for this course";
+            }
+            else
+            {
+                ViewBag.Message = "The slot is not free for this room";
+            }
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;
             List<Room> rooms = roomManager.GetAllRooms();
