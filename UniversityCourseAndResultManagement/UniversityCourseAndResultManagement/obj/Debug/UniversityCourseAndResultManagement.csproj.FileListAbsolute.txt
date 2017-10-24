@@ -55,3 +55,4 @@ E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResul
 E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.csprojResolveAssemblyReference.cache
 E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.dll
 E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\obj\Debug\UniversityCourseAndResultManagement.pdb
+E:\Bangla\UCMS-BITM\UniversityCourseAndResultManagement\UniversityCourseAndResultManagement\bin\Sweet.dll

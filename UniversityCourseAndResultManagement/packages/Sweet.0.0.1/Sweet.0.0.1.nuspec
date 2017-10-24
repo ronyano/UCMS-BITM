@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Sweet</id>
+    <version>0.0.1</version>
+    <title>Sweet</title>
+    <authors>James Ottaway</authors>
+    <owners>James Ottaway</owners>
+    <licenseUrl>https://github.com/jamesottaway/Sweet/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/jamesottaway/Sweet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Syntactic sugar for .NET</description>
+    <summary>Syntactic sugar for .NET</summary>
+    <copyright>Copyright 2014</copyright>
+  </metadata>
+</package>

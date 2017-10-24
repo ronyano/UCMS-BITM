@@ -43,6 +43,9 @@
       <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Sweet">
+      <HintPath>..\packages\Sweet.0.0.1\lib\portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1\Sweet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -279,7 +282,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert-dev.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\sweetalert.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -323,6 +329,7 @@
     <Content Include="Views\Home\ClassRoom.cshtml" />
     <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Views\Home\ViewResult.cshtml" />
+    <Content Include="Views\Home\UnassignAllCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

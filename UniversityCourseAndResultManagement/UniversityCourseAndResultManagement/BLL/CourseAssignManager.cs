@@ -23,6 +23,16 @@ namespace UniversityCourseAndResultManagement.BLL
             return false;
         }
 
+        public string UnAssign()
+        {
+            int rowsAffected = courseAssignGateway.UnAssign();
+            if (rowsAffected > 0)
+            {
+                return "All Course Unassigned successfully";
+            }
+            return "Course not Unassigned";
+        }
+
         public int GetTeacherIdByCourseId(int courseId)
         {
             return courseAssignGateway.GetTeacherIdByCourseId(courseId);

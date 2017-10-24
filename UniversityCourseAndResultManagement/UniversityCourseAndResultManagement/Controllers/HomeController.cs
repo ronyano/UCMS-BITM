@@ -37,11 +37,24 @@ namespace UniversityCourseAndResultManagement.Controllers
 
             return View();
         }
-
         public ActionResult Course()
         {
-            
+            return View();
+        }
 
+        [HttpGet]
+        public ActionResult UnassignAllCourses()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UnassignAllCourses(bool isClicked)
+        {
+            if (isClicked)
+            {
+                ViewBag.Status = courseAssignManager.UnAssign();
+            }
             return View();
         }
 

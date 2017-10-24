@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Unassign Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Unassign All Courses</h2>
+<hr/>
+@if (ViewBag.Status != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Status</b></p>
+}
+@using (@Html.BeginForm("UnassignAllCourses", "Home", FormMethod.Post, new {@id = "unassignAllCoursesForm", @name = "unassignAllCoursesForm"}))
+{
+    <input type="hidden" id="isClicked" name="isClicked"/>
+    <input type="submit" class="btn btn-lg btn-danger" id="unassignAllcoursesButton" name="unassignAllcoursesButton" value="Unassign Courses"/>
+}
+@section styles
+{
+    
+<link href="~/Styles/sweetalert.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#isClicked").val('');
+            $("#unassignAllCoursesForm").submit(function (e) {
+                e.preventDefault();
+                swal({
+                    title: 'Confirmation',
+                    text: "Are you sure to unassign all courses?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButttonText: 'No'
+                }, function(isConfirmed) {
+                    if (isConfirmed) {
+                        $("#isClicked").val(true);
+                        document.unassignAllCoursesForm.submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

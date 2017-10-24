@@ -13,8 +13,18 @@ namespace UniversityCourseAndResultManagement.DAL
         {
             bool bit = true;
             string query = "INSERT INTO CourseAssignTeacher VALUES('" + courseAssignToTeacher.TeacherId + "','" + courseAssignToTeacher.DepartmentId + "','" +
-                           courseAssignToTeacher.CourseId + "','"+bit+ "')";
+                           courseAssignToTeacher.CourseId + "','" + bit + "')";
            // if(Connection.State != ConnectionState.Open)
+            Connection.Open();
+            Command.CommandText = query;
+            int rowsAffected = Command.ExecuteNonQuery();
+            Connection.Close();
+            return rowsAffected;
+        }
+
+        public int UnAssign()
+        {
+            string query = "UPDATE CourseAssignTeacher SET TeacherId = " + null + ", Bit = " + 0 + " WHERE Bit = " + 1 + "";
             Connection.Open();
             Command.CommandText = query;
             int rowsAffected = Command.ExecuteNonQuery();
