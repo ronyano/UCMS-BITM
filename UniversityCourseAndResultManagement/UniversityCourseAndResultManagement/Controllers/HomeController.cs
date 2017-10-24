@@ -222,7 +222,7 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(Grades);
         }
 
-        /*
+        
         public JsonResult GetScheduleByCourseId(int courseId)
         {
             var rooms = allocateClassroomManager.GetAllRoomSchedule();
@@ -231,7 +231,7 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(roomsList);
         }
 
-        */
+        
         public JsonResult GetCreditByTeacherId(int teacherId)
         {
 
