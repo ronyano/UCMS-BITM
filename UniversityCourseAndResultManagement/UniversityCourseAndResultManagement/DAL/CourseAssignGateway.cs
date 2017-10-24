@@ -24,7 +24,11 @@ namespace UniversityCourseAndResultManagement.DAL
 
         public int UnAssign()
         {
-            string query = "UPDATE CourseAssignTeacher SET TeacherId = " + null + ", Bit = " + 0 + " WHERE Bit = " + 1 + "";
+            bool t = true;
+            bool f = false;
+
+           // string query = "UPDATE CourseAssignTeacher SET TeacherId = '" + null + "' , 'Bit = '" + f + "' WHERE Bit = '" + t + "'";
+            string query = "UPDATE CourseAssignTeacher SET Bit = " + 0 + " WHERE Bit = " + 1 + " ";
             Connection.Open();
             Command.CommandText = query;
             int rowsAffected = Command.ExecuteNonQuery();
@@ -34,7 +38,7 @@ namespace UniversityCourseAndResultManagement.DAL
 
         public int GetTeacherIdByCourseId(int courseId)
         {
-            string query = "SELECT * FROM CourseAssignTeacher WHERE CourseId = '" + courseId + "'";
+            string query = "SELECT * FROM CourseAssignTeacher WHERE CourseId = '" + courseId + "' AND Bit = '" + 1 + "' ";
 
             Connection.Open();
             Command.CommandText = query;
