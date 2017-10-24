@@ -54,17 +54,18 @@
     <br />
     <hr />
     <br />
-    <table class="table table-striped table-hover" id="">
+    <table class="table table-striped table-hover" id="GradeTable">
         <thead>
             <tr>
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Course Code</th>
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Name/Title</th>
-                <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Schedule Info</th>
+                <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Grade</th>
             </tr>
         </thead>
-        <tbody id=""></tbody>
+        <tbody id="GradeTableBody"></tbody>
     </table>
 </form>
+
 
 @section scripts
 {
@@ -73,7 +74,7 @@
         $(document).ready(function() {
             $("#StudentRegNo").change(function() {
 
-
+                $("#GradeTableBody").empty();
                 var deptId;
                 var Id = $("#StudentRegNo").val();
                 var json = { Id: Id };
@@ -90,43 +91,72 @@
 
                         $("#StudentDepartment").val(data.deptName.DepartmentName);
                         deptId = data.student.DepartmentId;
-                        alert("Success " + deptId);
+                        //alert("Success " + deptId);
                     }
                 });
+                // $("#courseTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.SemesterId + '</td><td>' + teacherName + '</td></tr>');
 
 
-               // $("#GradeLetter").empty();
-                //$("#GradeLetter").append('<option value="">Select...</option>');
-
-                $("#Course").empty();
-                $("#Course").append('<option value="">Select...</option>');
-                //alert("Out "+ deptId);
-                var courseJson = { departmentId: deptId };
+                var enrollCourseJson = { studentId: Id };
 
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("GetCoursesByDepartmentId", "Home")',
+                    url: '@Url.Action("GetCoursesByStudentId", "Home")',
                     //url: '/Department/GetStudentsByDepartmentId',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(courseJson),
+                    data: JSON.stringify(enrollCourseJson),
                     success: function(data) {
-                        // alert(deptId);
                         $.each(data, function(key, value) {
+                            var courseJson = { courseId: value.CourseId };
+                            $("#GradeTableBody").empty();
 
-                            $("#Course").append('<option value=' + value.Id + '>' + value.CourseCode + '</option>');
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("GetCoursesByCourseId", "Home")',
+                                //url: '/Department/GetStudentsByDepartmentId',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(courseJson),
+                                success: function(inData) {
+                                    $.each(inData, function(key, value) {
+                                        
+                                        var gradeText = "Not Graded yet!!";
+                                        //methoddd
+                                        //alert(value.CourseId );
+                                        var gradeJson = { courseId: value.Id, studentId: Id };
+
+                                        $.ajax({
+                                            async: false,
+                                            type: "POST",
+                                            url: '@Url.Action("GetGradeByCourseAndStudentId", "Home")',
+                                            //url: '/Department/GetStudentsByDepartmentId',
+                                            contentType: "application/json; charset=utf-8",
+                                            data: JSON.stringify(gradeJson),
+                                            success: function (gradeData) {
+                                               // alert("Grade "+gradeData);
+                                                if (!$.trim(gradeData.Grade)) {
+                                                   // alert("What follows is blank: " + gradeData);
+                                                    gradeText = "Not Graded Yet";
+                                                }
+                                                else {
+                                                    //alert(gradeData.Grade);
+                                                    gradeText = gradeData.Grade;
+                                                }
+
+                                            }
+                                        });
+                                        //methodd
+
+
+                                        $("#GradeTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + gradeText + '</td></tr>');
+                                    });
+                                }
+                            });
                             //alert(value.Id);
                         });
                         //alert("Finish"+deptId);
                     }
                 });
 
-                $("#Course").change(function () {
-                    var value = $("#Course").val();
-                    $("#CourseId").val(value);
-
-                    //var x = $("#CourseId").val();
-                    //alert("Changed "+ x);
-                });
 
             });
         });

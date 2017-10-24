@@ -213,6 +213,15 @@ namespace UniversityCourseAndResultManagement.Controllers
             return Json(courseList);
         }
 
+        public JsonResult GetGradeByCourseAndStudentId(int courseId, int studentId)
+        {
+            var Grades = resultManager.GetAllResults().FirstOrDefault(c => (c.CourseId == courseId) && (c.StudentId == studentId) );
+           // var courseList = Grades.Where(a => a.Id == courseId).ToList();
+
+
+            return Json(Grades);
+        }
+
         /*
         public JsonResult GetScheduleByCourseId(int courseId)
         {

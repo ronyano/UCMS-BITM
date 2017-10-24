@@ -62,7 +62,7 @@
                     <option value="">-Select-</option>
                     @foreach (Grade grade  in grades)
                     {
-                        <option value="@grade.Id">@grade.GradeLetter</option>
+                        <option value="@grade.GradeLetter">@grade.GradeLetter</option>
                     }
                 </select>
             </td>
@@ -70,7 +70,7 @@
         <tr>
             <input type="hidden" id="StudentId" name="StudentId"/>
             <input type="hidden" id="CourseId" name="CourseId"/>
-            <input type="hidden" id="GradeId" name="GradeId"/>
+            <input type="hidden" id="Grade" name="Grade" />
             <td></td>
             <td></td>
             <td style="padding: 15px"><input type="submit" value="Save" /></td>
@@ -153,7 +153,9 @@
 
                 $("#GradeLetter").change(function() {
                     var value = $("#GradeLetter").val();
-                    $("#GradeId").val(value);
+                    $("#Grade").val(value);
+                    value = $("#Grade").val();
+                    alert(value);
                     //var x = $("#CourseId").val();
                     //alert("Changed "+ x);
                 });

@@ -18,5 +18,10 @@ namespace UniversityCourseAndResultManagement.BLL
             }
             else return false;
         }
+
+        public List<Result> GetAllResults()
+        {
+            return resultGateway.GetAllResults();
+        }
     }
 }
