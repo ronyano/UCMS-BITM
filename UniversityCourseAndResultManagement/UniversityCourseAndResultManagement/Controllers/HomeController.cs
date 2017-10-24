@@ -319,6 +319,35 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+
+        public JsonResult CheckRoomIfFree(int roomId, int dayId, string fromTime, string toTime)
+        {
+            var roomSchedule =
+                allocateClassroomManager.GetAllRoomSchedule().Where(a => (a.RoomId == roomId && a.DayId == dayId)).ToList();
+
+            var result = "Empty";
+
+            foreach (var room in roomSchedule)
+            {
+                var fTime = room.FromStringTime.Split(':');
+                var tTime = room.ToStringTime.Split(':');
+                var fromTimeVar = fromTime.Split(':');
+                var toTimeVar = toTime.Split(':');
+
+                if (int.Parse(fromTimeVar[0]) < int.Parse(tTime[0]))
+                {
+                    result = room.CourseId + " this course is assigned at this time";
+                }
+                else if ((int.Parse(fromTimeVar[0]) == int.Parse(tTime[0])) &&
+                         (int.Parse(fromTimeVar[1]) < int.Parse(tTime[1])))
+                {
+                    result = room.CourseId + " this course is assigned at this time";                    
+                }
+                
+            }
+
+            return Json(result);
+        }
         public JsonResult GetStudentByRegno(int Id)
         {
             var student = studentManager.GetAllStudents().FirstOrDefault(c => c.Id == Id);

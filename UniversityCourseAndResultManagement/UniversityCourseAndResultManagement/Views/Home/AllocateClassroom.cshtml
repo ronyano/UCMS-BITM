@@ -85,7 +85,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td style="padding: 15px"><input type="submit" value="Allocate" /></td>
+            <td style="padding: 15px"><input type="submit" value="Allocate" id="submitButton"/></td>
         </tr>
     </table>
 </form>
@@ -97,9 +97,10 @@
         $(document).ready(function () {
            // alert("Ready");
             $("#DepartmentId").change(function () {
-
+                //alert("Change");
                 $("#CourseId").empty();
                 $("#CourseId").append('<option value="">--Select...</option>');
+
                 var deptId = $("#DepartmentId").val();
 
                     var json = { departmentId: deptId };
@@ -118,13 +119,42 @@
                     }
                 });
 
-
-
+                
 
 
             });
 
 
+            //======================>
+            $("#FromTime").change(function () {
+                //alert("Room Change");
+                $("#ToTime").change(function () {
+                    //alert("In Function");
+                    var roomDayJson = { roomId: $("#RoomId").val(), dayId: $("#DayId").val(), fromTime: $("#FromTime").val(), toTime: $("#ToTime").val() };
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("CheckRoomIfFree", "Home")',
+                        //url: '/Department/GetStudentsByDepartmentId',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(roomDayJson),
+                        success: function (roomInfoData) {
+                            if (roomInfoData == "Empty") {
+                                alert("Course can be assigned");
+                            } else {
+                                $("#submitButton").hide();
+                                alert("Room Info " + roomInfoData);
+                            }
+                            
+                        }
+                    });
+
+                });
+
+            });
+
         });
+
+
     </script>
 }
