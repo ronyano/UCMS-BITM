@@ -518,7 +518,7 @@ namespace UniversityCourseAndResultManagement.Controllers
             }
             else
             {
-                ViewBag.Message = "Already Graded";
+                ViewBag.Message = "Already Graded for this course";
             }
             List<Student> students = studentManager.GetAllStudents();
             ViewBag.Students = students;
