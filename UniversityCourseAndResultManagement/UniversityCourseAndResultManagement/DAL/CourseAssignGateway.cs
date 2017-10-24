@@ -27,7 +27,6 @@ namespace UniversityCourseAndResultManagement.DAL
             bool t = true;
             bool f = false;
 
-           // string query = "UPDATE CourseAssignTeacher SET TeacherId = '" + null + "' , 'Bit = '" + f + "' WHERE Bit = '" + t + "'";
             string query = "UPDATE CourseAssignTeacher SET Bit = " + 0 + " WHERE Bit = " + 1 + " ";
             Connection.Open();
             Command.CommandText = query;

@@ -452,6 +452,22 @@ namespace UniversityCourseAndResultManagement.Controllers
             ViewBag.Days = days;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult UnAllocateClassRoom()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UnAllocateClassRoom(bool isClicked)
+        {
+            if (isClicked)
+            {
+                ViewBag.Status = allocateClassroomManager.UnAllocateClassRoom();
+            }
+            return View();
+        }
         public ActionResult AboutUs()
         {
             return View();

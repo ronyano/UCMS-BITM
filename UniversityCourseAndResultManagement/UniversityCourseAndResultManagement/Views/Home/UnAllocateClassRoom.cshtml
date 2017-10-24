@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "UnAllocate ClassRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UnAllocate ClassRoom</h2>
+<hr/>
+@if (ViewBag.Status != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Status</b></p>
+}
+
+@using (@Html.BeginForm("UnAllocateClassRoom", "Home", FormMethod.Post, new { @id = "UnAllocateClassRoomForm", @name = "UnAllocateClassRoomForm" }))
+{
+    <input type="hidden" id="isClicked" name="isClicked"/>
+    <input type="submit" class="btn btn-lg btn-danger" id="UnAllocateClassRoomButton" name="UnAllocateClassRoomButton" value="Unallocate Rooms" />
+}
+
+@section styles
+{
+    <link href="~/Styles/sweetalert.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#isClicked").val('');
+            $('#UnAllocateClassRoomForm').submit(function(e) {
+                e.preventDefault();
+                swal({
+                    title: 'Confirmation',
+                    text: "Are you sure to unallocate all classroom?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }, function(isConfirmed) {
+                    if (isConfirmed) {
+                        $("#isClicked").val(true);
+                        document.UnAllocateClassRoomForm.submit();
+                    }
+                });
+            });
+        });
+    </script>
+}
+

@@ -25,6 +25,16 @@ namespace UniversityCourseAndResultManagement.DAL
             return rowsAffected;
         }
 
+        public int UnAllocateClassRoom()
+        {
+            string query = "UPDATE AllocateClassroom SET Bit = " + 0 + " WHERE Bit = " + 1 + " ";
+            Connection.Open();
+            Command.CommandText = query;
+            int rowsAffected = Command.ExecuteNonQuery();
+            Connection.Close();
+            return rowsAffected;
+        }
+
 
         public List<AllocateClassroom> GetAllRoomSchedule()
         {
