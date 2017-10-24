@@ -20,6 +20,26 @@ namespace UniversityCourseAndResultManagement.DAL
             Connection.Close();
             return rowsAffected;
         }
+
+        public int IsCourrseEnrollable(EnrollInACourse enrollInACourse)
+        {
+            string query = "SELECT COUNT(*) FROM EnrollCourse WHERE CourseId = " + enrollInACourse.CourseId +
+                           "AND StudentId = " + enrollInACourse.StudentId + "";
+            Connection.Open();
+            Command.CommandText = query;
+            SqlDataReader reader = Command.ExecuteReader();
+            int count = 0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    count += Convert.ToInt32(reader[0]);
+                }
+            }
+            Connection.Close();
+            reader.Close();
+            return count;
+        }
         public List<EnrollInACourse> GetAllEnrollInACourses()
         {
             string query = "SELECT * FROM EnrollCourse";

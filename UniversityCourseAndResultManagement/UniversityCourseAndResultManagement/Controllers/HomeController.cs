@@ -320,11 +320,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             bool rowsAffected = enrollCourseManager.Save(enrollInACourse);
             if (rowsAffected)
             {
-                ViewBag.Message = "Course Enrolled";
+                ViewBag.Message = "Enrolled in this course successfully";
             }
             else
             {
-                ViewBag.Message = "Course can not be Enrolled!";
+                ViewBag.Message = "Already Enrolled in this course";
             }
 
             List<Student> students = studentManager.GetAllStudents();
