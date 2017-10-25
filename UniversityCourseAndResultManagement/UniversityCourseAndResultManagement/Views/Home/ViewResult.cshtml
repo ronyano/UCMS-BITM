@@ -54,6 +54,10 @@
     <br />
     <hr />
     <br />
+    <input type="hidden" id="CourseId" name="CourseId" />
+    <input type="hidden" id="StudentId" name="StudentId" />
+    <input type="hidden" id="Grade" name="Grade" />
+
     <table class="table table-striped table-bordered" id="GradeTable" style="font-size: 20px">
         <thead>
             <tr>
@@ -61,6 +65,7 @@
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Name/Title</th>
                 <th style="border: 1px solid #ddd; text-align: left; padding: 15px">Grade</th>
             </tr>
+            
         </thead>
         <tbody id="GradeTableBody"></tbody>
     </table>
@@ -148,6 +153,8 @@
 
 
                                         $("#GradeTableBody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + gradeText + '</td></tr>');
+                                        $("#CourseId").val(value.Id);
+                                        $("#Grade").val(gradeText);
                                     });
                                 }
                             });

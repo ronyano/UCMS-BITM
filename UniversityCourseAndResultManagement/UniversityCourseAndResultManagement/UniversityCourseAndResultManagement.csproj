@@ -205,6 +205,7 @@
     <Compile Include="Models\EntityModels\Designation.cs" />
     <Compile Include="Models\EntityModels\EnrollInACourse.cs" />
     <Compile Include="Models\EntityModels\Grade.cs" />
+    <Compile Include="Models\EntityModels\Pdf.cs" />
     <Compile Include="Models\EntityModels\Result.cs" />
     <Compile Include="Models\EntityModels\Room.cs" />
     <Compile Include="Models\EntityModels\Semester.cs" />
@@ -334,6 +335,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
