@@ -38,7 +38,7 @@ namespace UniversityCourseAndResultManagement.DAL
 
         public List<AllocateClassroom> GetAllRoomSchedule()
         {
-            string query = "SELECT * FROM AllocateClassroom";
+            string query = "SELECT * FROM AllocateClassroom WHERE Bit=1";
             Connection.Open();
             Command.CommandText = query;
             SqlDataReader reader = Command.ExecuteReader();
