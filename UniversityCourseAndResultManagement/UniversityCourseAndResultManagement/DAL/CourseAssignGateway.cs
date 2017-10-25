@@ -22,6 +22,25 @@ namespace UniversityCourseAndResultManagement.DAL
             return rowsAffected;
         }
 
+        public int IsCourseFree(CourseAssignToTeacher courseAssignToTeacher)
+        {
+            string query = "SELECT COUNT(*) FROM CourseAssignTeacher WHERE CourseId = " + courseAssignToTeacher.CourseId +
+                           "";
+            Connection.Open();
+            Command.CommandText = query;
+            SqlDataReader reader = Command.ExecuteReader();
+            int count = 0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    count += Convert.ToInt32(reader[0]);
+                }
+            }
+            Connection.Close();
+            reader.Close();
+            return count;
+        }
         public int UnAssign()
         {
             bool t = true;
