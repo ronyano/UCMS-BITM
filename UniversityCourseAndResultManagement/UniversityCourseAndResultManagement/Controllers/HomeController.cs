@@ -484,6 +484,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             return View();
         }
 
+        public ActionResult Team()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult ClassScheduleRoomInformation()
         {
