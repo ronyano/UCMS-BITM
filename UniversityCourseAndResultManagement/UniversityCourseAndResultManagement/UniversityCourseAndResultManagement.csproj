@@ -262,6 +262,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\11207280_1016078891786205_8111382671919335893_n.jpg" />
+    <Content Include="Image\17097211_375156432871562_5990098229647273638_o.jpg" />
+    <Content Include="Image\IMG_4254.jpg" />
     <Content Include="Image\Main_Quadrangle_University_of_Sydney.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -285,6 +288,7 @@
     <Content Include="Scripts\sweetalert-dev.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\meetteamstyle.css" />
     <Content Include="Styles\sweetalert.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -322,7 +326,6 @@
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Home\CourseStatistics.cshtml" />
     <Content Include="Views\Home\EnrollCourse.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\AllocateClassroom.cshtml" />
     <Content Include="Views\Home\ClassScheduleRoomInformation.cshtml" />
     <Content Include="Views\Home\StudentResult.cshtml" />
@@ -331,6 +334,7 @@
     <Content Include="Views\Home\ViewResult.cshtml" />
     <Content Include="Views\Home\UnassignAllCourses.cshtml" />
     <Content Include="Views\Home\UnAllocateClassRoom.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
