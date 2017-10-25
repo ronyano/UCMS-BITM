@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using UniversityCourseAndResultManagement.BLL;
 using UniversityCourseAndResultManagement.Models.EntityModels;
 
