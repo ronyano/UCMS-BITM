@@ -12,11 +12,24 @@ namespace UniversityCourseAndResultManagement.BLL
         ResultGateway resultGateway = new ResultGateway();
         public bool Save(Result result)
         {
-            if (resultGateway.Save(result) > 0)
+            if (IsStudentResultAssignable(result))
             {
-                return true;
+                if (resultGateway.Save(result) > 0)
+                {
+                    return true;
+                }
             }
-            else return false;
+            return false;
+        }
+
+        public bool IsStudentResultAssignable(Result result)
+        {
+            int countRow = resultGateway.IsStudentResultAssignable(result);
+            if (countRow > 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public List<Result> GetAllResults()

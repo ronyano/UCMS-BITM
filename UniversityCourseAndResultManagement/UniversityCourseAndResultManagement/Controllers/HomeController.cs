@@ -323,11 +323,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             bool rowsAffected = enrollCourseManager.Save(enrollInACourse);
             if (rowsAffected)
             {
-                ViewBag.Message = "Course Enrolled";
+                ViewBag.Message = "Enrolled in this course successfully";
             }
             else
             {
-                ViewBag.Message = "Course can not be Enrolled!";
+                ViewBag.Message = "Already Enrolled in this course";
             }
 
             List<Student> students = studentManager.GetAllStudents();
@@ -446,13 +446,36 @@ namespace UniversityCourseAndResultManagement.Controllers
         public ActionResult AllocateClassroom(AllocateClassroom allocateClassroom)
         {
             bool rowsAffected = allocateClassroomManager.Save(allocateClassroom);
-
+            if (rowsAffected)
+            {
+                ViewBag.Message = "Room allocated for this course";
+            }
+            else
+            {
+                ViewBag.Message = "The slot is not free for this room";
+            }
             List<Department> departments = departmentManager.GetAllDepartments();
             ViewBag.Departments = departments;
             List<Room> rooms = roomManager.GetAllRooms();
             ViewBag.Rooms = rooms;
             List<Day> days = dayManager.GetAllDays();
             ViewBag.Days = days;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult UnAllocateClassRoom()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UnAllocateClassRoom(bool isClicked)
+        {
+            if (isClicked)
+            {
+                ViewBag.Status = allocateClassroomManager.UnAllocateClassRoom();
+            }
             return View();
         }
         public ActionResult AboutUs()
@@ -501,11 +524,11 @@ namespace UniversityCourseAndResultManagement.Controllers
             bool saveSuccess = resultManager.Save(result);
             if (saveSuccess)
             {
-                ViewBag.message = "Successfully Graded";
+                ViewBag.Message = "Successfully Graded";
             }
             else
             {
-                ViewBag.message = "Not Graded";
+                ViewBag.Message = "Already Graded for this course";
             }
             List<Student> students = studentManager.GetAllStudents();
             ViewBag.Students = students;

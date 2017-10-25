@@ -9,6 +9,10 @@
 
 <h2>Enroll In A Course</h2>
 <hr/>
+@if (ViewBag.Message != null)
+{
+    <p style="white-space: pre-wrap; color: blue; font-size: 20px"><b>@ViewBag.Message</b></p>
+}
 <form method="POST" id="enrollCourseForm">
     <table style="width: 50%; font-size: 20px">
         <tr>

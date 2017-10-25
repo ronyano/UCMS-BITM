@@ -22,5 +22,15 @@ namespace UniversityCourseAndResultManagement.BLL
         {
             return allocateClassroomGateway.GetAllRoomSchedule();
         }
+
+        public string UnAllocateClassRoom()
+        {
+            int rowsAffected = allocateClassroomGateway.UnAllocateClassRoom();
+            if (rowsAffected > 0)
+            {
+                return "All class room unallocated";
+            }
+            return "Class room are not unallocated";
+        }
     }
 }

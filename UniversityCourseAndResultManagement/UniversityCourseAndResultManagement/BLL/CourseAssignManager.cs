@@ -12,7 +12,7 @@ namespace UniversityCourseAndResultManagement.BLL
         CourseAssignGateway courseAssignGateway = new CourseAssignGateway(); 
         public bool Save(CourseAssignToTeacher course)
         {
-            if (IsCourseAssignable(course.CourseId))
+            if (IsCourseAssignable(course.CourseId) && IsCourseFree(course))
             {
                 int rowsAffected = courseAssignGateway.Save(course);
                 if (rowsAffected > 0)
@@ -21,6 +21,16 @@ namespace UniversityCourseAndResultManagement.BLL
                 }
             }
             return false;
+        }
+
+        public bool IsCourseFree(CourseAssignToTeacher courseAssignToTeacher)
+        {
+            int countRow = courseAssignGateway.IsCourseFree(courseAssignToTeacher);
+            if (countRow > 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         public string UnAssign()

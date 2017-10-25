@@ -13,12 +13,24 @@ namespace UniversityCourseAndResultManagement.BLL
 
         public bool Save(EnrollInACourse enrollInACourse)
         {
-            if (enrollCourseGateway.Save(enrollInACourse) > 0)
-                return true;
-            else
+            if (IsCourseEnrollable(enrollInACourse))
+            {
+                if (enrollCourseGateway.Save(enrollInACourse) > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsCourseEnrollable(EnrollInACourse enrollInACourse)
+        {
+            int countRow = enrollCourseGateway.IsCourrseEnrollable(enrollInACourse);
+            if (countRow > 0)
             {
                 return false;
             }
+            return true;
         }
 
         public List<EnrollInACourse> GetAllEnrollInACourses()
